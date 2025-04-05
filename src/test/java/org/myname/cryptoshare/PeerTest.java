@@ -8,7 +8,6 @@ public class PeerTest {
 
     @Test
     public void testSharedSecretDerivation() throws Exception {
-        // Create two peers (simulate two endpoints)
         Peer peerA = new Peer();
         Peer peerB = new Peer();
 

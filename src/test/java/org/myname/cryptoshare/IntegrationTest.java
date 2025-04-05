@@ -53,7 +53,6 @@ public class IntegrationTest {
         assertEquals(originalContent, new String(decryptedData, StandardCharsets.UTF_8),
                 "Decrypted file content should match the original content");
 
-        // Clean up the stored test file.
         java.nio.file.Files.deleteIfExists(java.nio.file.Paths.get(testFileName));
     }
 }
