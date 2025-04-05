@@ -5,22 +5,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // 1. Start the mDNS service on port 9980 (to match Python)
+        //Start the mDNS service on port 9980 (to match Python)
         PeerService peerService = new PeerService();
         peerService.start();
 
-        // 2. Create a peer (this loads keys, etc.)
+        //Create a peer (this loads keys, etc.)
         Peer peer = new Peer();
         System.out.println("DEBUG - Peer 'peer_01' initialized on port 9900");
         System.out.println("DEBUG - Starting broadcast and discovery services");
 
-        // 3. Start the peer
+        //Start the peer
         peer.start();
 
-        // 4. Start a simple CLI loop
+        //Start a simple CLI loop
         startCLI(peer);
 
-        // 5. Stop the service when done
+        //Stop the service when done
         peerService.stop();
     }
 

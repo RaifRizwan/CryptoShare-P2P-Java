@@ -7,15 +7,14 @@ import java.nio.ByteBuffer;
 
 public class JavaServer {
     public static void main(String[] args) {
-        // We choose port 6000 for this server. Make sure this matches the client!
-        int port = 6000;
+        int port = 9000;
         try (
                 // Create a ServerSocket that listens for incoming connections on the specified port.
                 ServerSocket serverSocket = new ServerSocket(port)
         ) {
             System.out.println("Java server listening on port " + port);
 
-            // Wait for a client to connect. This call blocks until a connection is made.
+            // Wait for a client to connect.
             Socket clientSocket = serverSocket.accept();
             System.out.println("Client connected: " + clientSocket.getInetAddress());
 
@@ -29,11 +28,11 @@ public class JavaServer {
             // Convert the 4-byte array into an integer (big-endian order).
             int sigLen = ByteBuffer.wrap(intBuffer).getInt();
 
-            // Now, create a byte array to hold the signature based on the length we just read.
+            // Create a byte array to hold the signature based on the length we just read.
             byte[] signature = new byte[sigLen];
             is.read(signature);
 
-            // Next, read the length of the nonce in the same way.
+            // Read the length of the nonce in the same way.
             is.read(intBuffer);
             int nonceLen = ByteBuffer.wrap(intBuffer).getInt();
 
@@ -41,7 +40,7 @@ public class JavaServer {
             byte[] nonce = new byte[nonceLen];
             is.read(nonce);
 
-            // Then, read the length of the ciphertext.
+            // Read the length of the ciphertext.
             is.read(intBuffer);
             int ctLen = ByteBuffer.wrap(intBuffer).getInt();
 

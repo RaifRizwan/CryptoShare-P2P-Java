@@ -109,7 +109,7 @@ public class Peer {
      */
     public byte[] deriveAESKey(byte[] sharedSecret) throws Exception {
         byte[] salt = new byte[32];
-        Arrays.fill(salt, (byte) 0); // For demo purposes; in production, use a proper random salt.
+        Arrays.fill(salt, (byte) 0);
         byte[] info = "AES key derivation".getBytes(StandardCharsets.UTF_8);
         int aesKeyLength = 16;  // 16 bytes = 128-bit AES key
         return HKDF.deriveKey("HmacSHA256", salt, sharedSecret, info, aesKeyLength);
@@ -190,7 +190,6 @@ public class Peer {
     public void migrateKeys() throws Exception {
         System.out.println("Migrating keys...");
         generateKeys(); // Regenerate both Ed25519 and X25519 key pairs.
-        // In an actual implementation, you would now notify your contacts of the new public keys.
         System.out.println("Keys migrated. Contacts notified.");
     }
 
@@ -215,7 +214,7 @@ public class Peer {
      */
     public void start() {
         String peerId = "peer_01";
-        int port = 9000; // Use the same port as your Python peer if desired.
+        int port = 9000;
         System.out.println("DEBUG - Peer '" + peerId + "' initialized on port " + port);
         System.out.println("DEBUG - Starting broadcast and discovery services");
     }
@@ -259,9 +258,9 @@ public class Peer {
             // Loop until we have generated enough key material.
             while (loc < length) {
                 mac.init(new SecretKeySpec(prk, hmacAlgorithm));
-                mac.update(t);       // Previous block (or empty for first block)
-                mac.update(info);      // Contextual info
-                mac.update((byte) counter); // Counter value
+                mac.update(t);
+                mac.update(info);
+                mac.update((byte) counter);
                 t = mac.doFinal();
                 int copyLength = Math.min(t.length, length - loc);
                 System.arraycopy(t, 0, result, loc, copyLength);

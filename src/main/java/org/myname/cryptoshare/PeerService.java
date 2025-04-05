@@ -9,10 +9,9 @@ import java.net.InetAddress;
 
 public class PeerService {
     private JmDNS jmdns;
-    // Use the same service type as your Python peer if needed.
     private final String serviceType = "_p2pfileshare._tcp.local.";
-    private final String serviceName = "peer_02"; // match the Python peer name
-    private final int servicePort = 9000; // match the Python port
+    private final String serviceName = "peer_02";
+    private final int servicePort = 9000;
 
     public void start() throws IOException {
         // Create the JmDNS instance and bind it to the local host.
