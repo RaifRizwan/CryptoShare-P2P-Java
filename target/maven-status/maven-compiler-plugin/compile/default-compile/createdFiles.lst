@@ -1,0 +1,10 @@
+org/myname/cryptoshare/Peer$EncryptionResult.class
+org/myname/cryptoshare/Simulation.class
+org/myname/cryptoshare/JavaServer.class
+org/myname/cryptoshare/Peer.class
+org/myname/cryptoshare/Peer$HKDF.class
+org/myname/cryptoshare/PeerService.class
+org/myname/cryptoshare/PeerService$1.class
+org/myname/cryptoshare/FileManager.class
+org/myname/cryptoshare/Main.class
+org/myname/cryptoshare/JavaClient.class
