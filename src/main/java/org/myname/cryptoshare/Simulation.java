@@ -12,7 +12,7 @@ public class Simulation {
             Peer peerA = new Peer();
             Peer peerB = new Peer();
 
-            // --- Mutual Authentication ---
+            // Mutual Authentication
             // Peer A begins by generating a random challenge.
             byte[] challenge = peerA.generateChallenge();
             System.out.println("Peer A generated challenge.");
@@ -30,7 +30,7 @@ public class Simulation {
                 return; // Stop the simulation if authentication fails.
             }
 
-            // --- Key Exchange and Session Key Derivation ---
+            //Key Exchange and Session Key Derivation
             // Both peers perform an X25519 key exchange to compute a shared secret.
             byte[] sharedSecretA = peerA.computeSharedSecret(peerB.getXKeyPair().getPublic());
             byte[] sharedSecretB = peerB.computeSharedSecret(peerA.getXKeyPair().getPublic());
@@ -41,7 +41,7 @@ public class Simulation {
             byte[] aesKeyB = peerB.deriveAESKey(sharedSecretB);
             System.out.println("AES keys match: " + java.util.Arrays.equals(aesKeyA, aesKeyB));
 
-            // --- File Listing and User Consent ---
+            // File Listing and User Consent
             // We simulate a file sharing scenario by listing available files.
             FileManager fileManager = new FileManager();
             List<String> files = fileManager.listAvailableFiles();
@@ -58,7 +58,7 @@ public class Simulation {
                 return;
             }
 
-            // --- File Transfer ---
+            //File Transfer
             // For demonstration, we simulate reading a file by using a hardcoded string.
             byte[] fileData = "This is a secure file content".getBytes(StandardCharsets.UTF_8);
 
@@ -71,7 +71,7 @@ public class Simulation {
             // We simulate secure local storage by having Peer A store the encrypted file.
             fileManager.storeEncryptedFile("encrypted_" + requestedFile, encResult.ciphertext);
 
-            // --- File Reception and Verification ---
+            //File Reception and Verification
             // Peer B receives the encrypted package.
             // It decrypts the ciphertext using the shared AES key and the provided nonce.
             byte[] decryptedData = peerB.decryptData(aesKeyB, encResult.nonce, encResult.ciphertext);
@@ -80,8 +80,8 @@ public class Simulation {
             System.out.println("Signature verified: " + verified);
             System.out.println("Decrypted file: " + new String(decryptedData, StandardCharsets.UTF_8));
 
-            // --- Key Migration Simulation ---
-            // Finally, we simulate a key migration scenario where Peer A might need to generate new keys.
+            //Key Migration Simulation
+            //We simulate a key migration scenario where Peer A might need to generate new keys.
             System.out.println("Simulate key migration? (yes/no)");
             String migrateResponse = scanner.nextLine();
             if (migrateResponse.equalsIgnoreCase("yes")) {
